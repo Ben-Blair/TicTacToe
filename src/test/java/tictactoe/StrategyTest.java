@@ -1,7 +1,7 @@
 package tictactoe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
@@ -47,6 +47,6 @@ class StrategyTest {
     @Test
     void factoryRejectsUnknownType() {
         PlayerFactory factory = new PlayerFactory(new Scanner(""), new Random());
-        assertThrows(IllegalArgumentException.class, () -> factory.createPlayer("alien", Mark.X));
+        assertNull(factory.createPlayer("alien", Mark.X));
     }
 }

@@ -1,7 +1,6 @@
 package tictactoe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /** Runs a game: players take turns until someone wins or the board is full. */
 public class Game {
@@ -9,7 +8,7 @@ public class Game {
     private final Board board;
     private final Player firstPlayer;
     private final Player secondPlayer;
-    private final List<GameListener> listeners = new ArrayList<>();
+    private final ArrayList<GameListener> listeners = new ArrayList<>();
     private Player currentPlayer;
 
     /** DEPENDENCY INJECTION: the board and players are passed in instead of created here. */

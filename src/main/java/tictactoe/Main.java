@@ -18,14 +18,16 @@ public class Main {
         game.play();
     }
 
+    /** Keeps asking until the user types a player type the factory knows. */
     private static Player askForPlayer(Scanner scanner, PlayerFactory factory, Mark mark) {
-        while (true) {
-            System.out.print("Is player " + mark + " a human or computer? ");
-            try {
-                return factory.createPlayer(scanner.nextLine().trim(), mark);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Please type 'human' or 'computer'.");
+        Player player = null;
+        while (player == null) {
+            System.out.print("Is player " + mark + " human, computer, or smart? ");
+            player = factory.createPlayer(scanner.next(), mark);
+            if (player == null) {
+                System.out.println("Please type 'human', 'computer', or 'smart'.");
             }
         }
+        return player;
     }
 }

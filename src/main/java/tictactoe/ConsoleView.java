@@ -21,15 +21,18 @@ public class ConsoleView implements GameListener {
 
     private void printBoard(Board board) {
         for (int row = 0; row < Board.SIZE; row++) {
-            StringBuilder line = new StringBuilder(" ");
             for (int col = 0; col < Board.SIZE; col++) {
                 Mark mark = board.getMark(new Position(row, col));
-                line.append(mark == null ? " " : mark.toString());
+                if (mark == null) {
+                    System.out.print("   ");
+                } else {
+                    System.out.print(" " + mark + " ");
+                }
                 if (col < Board.SIZE - 1) {
-                    line.append(" | ");
+                    System.out.print("|");
                 }
             }
-            System.out.println(line);
+            System.out.println();
             if (row < Board.SIZE - 1) {
                 System.out.println("---+---+---");
             }

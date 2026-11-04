@@ -3,7 +3,6 @@ package tictactoe;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -29,13 +28,14 @@ class BoardTest {
     void cannotPlaceOnTakenCell() {
         Board board = new Board();
         board.place(new Position(0, 0), Mark.X);
-        assertThrows(IllegalArgumentException.class, () -> board.place(new Position(0, 0), Mark.O));
+        assertFalse(board.place(new Position(0, 0), Mark.O));
+        assertEquals(Mark.X, board.getMark(new Position(0, 0)));   // still X
     }
 
     @Test
     void cannotPlaceOffTheBoard() {
         Board board = new Board();
-        assertThrows(IllegalArgumentException.class, () -> board.place(new Position(3, 0), Mark.X));
+        assertFalse(board.place(new Position(3, 0), Mark.X));
     }
 
     @Test

@@ -1,20 +1,20 @@
 package tictactoe;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 /** Test helper: a fake strategy that plays a fixed list of moves in order. */
 class ScriptedStrategy implements MoveStrategy {
 
-    private final Queue<Position> moves;
+    private final Position[] moves;
+    private int nextMove = 0;
 
+    /** "Position..." lets you pass any number of positions. Java hands them to us as an array. */
     ScriptedStrategy(Position... moves) {
-        this.moves = new LinkedList<>(List.of(moves));
+        this.moves = moves;
     }
 
     @Override
     public Position chooseMove(Board board, Mark mark) {
-        return moves.remove();
+        Position move = moves[nextMove];
+        nextMove++;
+        return move;
     }
 }

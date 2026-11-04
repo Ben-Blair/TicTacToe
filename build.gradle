@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'application'   // lets us start the game with: ./gradlew run
+}
+
+group = 'tictactoe'
+version = '1.0'
+
+// Compile for Java 17 so the project builds on any JDK 17 or newer.
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application {
+    mainClass = 'tictactoe.Main'
+}
+
+run {
+    standardInput = System.in   // so the game can read what you type
+}
+
+test {
+    useJUnitPlatform()
+}

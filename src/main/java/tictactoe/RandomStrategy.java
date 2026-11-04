@@ -1,6 +1,6 @@
 package tictactoe;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 /** Strategy for a simple computer player that picks any empty cell at random. */
@@ -15,7 +15,7 @@ public class RandomStrategy implements MoveStrategy {
 
     @Override
     public Position chooseMove(Board board, Mark mark) {
-        List<Position> emptyPositions = board.getEmptyPositions();
+        ArrayList<Position> emptyPositions = board.getEmptyPositions();
         return emptyPositions.get(random.nextInt(emptyPositions.size()));
     }
 }
