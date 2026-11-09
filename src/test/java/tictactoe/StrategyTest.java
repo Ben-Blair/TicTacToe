@@ -2,6 +2,7 @@ package tictactoe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
@@ -48,5 +49,17 @@ class StrategyTest {
     void factoryRejectsUnknownType() {
         PlayerFactory factory = new PlayerFactory(new Scanner(""), new Random());
         assertNull(factory.createPlayer("alien", Mark.X));
+    }
+
+    @Test
+    void factoryRejectsNullType() {
+        PlayerFactory factory = new PlayerFactory(new Scanner(""), new Random());
+        assertNull(factory.createPlayer(null, Mark.X));
+    }
+
+    @Test
+    void humanStrategyStopsWhenInputRunsOut() {
+        MoveStrategy strategy = new HumanStrategy(new Scanner(""));   // no input at all
+        assertThrows(IllegalStateException.class, () -> strategy.chooseMove(new Board(), Mark.X));
     }
 }

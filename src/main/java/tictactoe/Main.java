@@ -10,12 +10,18 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         PlayerFactory factory = new PlayerFactory(scanner, new Random());
 
-        Player playerX = askForPlayer(scanner, factory, Mark.X);
-        Player playerO = askForPlayer(scanner, factory, Mark.O);
+        // If the input runs out partway through, end the program with a message instead of crashing.
+        try {
+            Player playerX = askForPlayer(scanner, factory, Mark.X);
+            Player playerO = askForPlayer(scanner, factory, Mark.O);
 
-        Game game = new Game(new Board(), playerX, playerO);
-        game.addListener(new ConsoleView());
-        game.play();
+            Game game = new Game(new Board(), playerX, playerO);
+            game.addListener(new ConsoleView());
+            game.play();
+        } catch (IllegalStateException e) {
+            System.out.println();
+            System.out.println("No more input. Goodbye!");
+        }
     }
 
     /** Keeps asking until the user types a player type the factory knows. */
@@ -23,6 +29,9 @@ public class Main {
         Player player = null;
         while (player == null) {
             System.out.print("Is player " + mark + " human, computer, or smart? ");
+            if (!scanner.hasNext()) {
+                throw new IllegalStateException("No more input.");
+            }
             player = factory.createPlayer(scanner.next(), mark);
             if (player == null) {
                 System.out.println("Please type 'human', 'computer', or 'smart'.");

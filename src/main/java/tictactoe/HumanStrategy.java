@@ -16,6 +16,12 @@ public class HumanStrategy implements MoveStrategy {
     public Position chooseMove(Board board, Mark mark) {
         while (true) {
             System.out.print("Player " + mark + ", choose a cell (1-9): ");
+
+            // If there is nothing left to read (for example, the user pressed Ctrl+D), stop asking.
+            if (!scanner.hasNext()) {
+                throw new IllegalStateException("No more input.");
+            }
+
             if (scanner.hasNextInt()) {
                 int cell = scanner.nextInt();
                 if (cell >= 1 && cell <= 9) {

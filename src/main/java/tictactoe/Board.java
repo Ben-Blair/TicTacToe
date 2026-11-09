@@ -23,9 +23,9 @@ public class Board {
         return getMark(position) == null;
     }
 
-    /** Puts the mark on the board. Returns false (and changes nothing) if the cell is taken or off the board. */
+    /** Puts the mark on the board. Returns false (and changes nothing) if the position is missing, taken, or off the board. */
     public boolean place(Position position, Mark mark) {
-        if (!isOnBoard(position) || !isEmpty(position)) {
+        if (position == null || !isOnBoard(position) || !isEmpty(position)) {
             return false;
         }
         cells[position.getRow()][position.getCol()] = mark;

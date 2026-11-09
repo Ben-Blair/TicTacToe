@@ -39,6 +39,12 @@ class BoardTest {
     }
 
     @Test
+    void cannotPlaceAtNullPosition() {
+        Board board = new Board();
+        assertFalse(board.place(null, Mark.X));
+    }
+
+    @Test
     void threeInARowWins() {
         Board board = new Board();
         board.place(new Position(0, 0), Mark.X);

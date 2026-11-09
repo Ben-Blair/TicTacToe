@@ -23,6 +23,9 @@ public class PlayerFactory {
 
     /** Returns a new Player, or null if the type isn't one we know. */
     public Player createPlayer(String type, Mark mark) {
+        if (type == null) {
+            return null;
+        }
         MoveStrategy strategy = strategies.get(type.toLowerCase());
         if (strategy == null) {
             return null;

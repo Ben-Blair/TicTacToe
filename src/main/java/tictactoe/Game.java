@@ -33,8 +33,19 @@ public class Game {
     }
 
     public void playTurn() {
+        // If the game is already finished, nobody gets to move.
+        if (isOver()) {
+            return;
+        }
+
         Position position = currentPlayer.chooseMove(board);
-        board.place(position, currentPlayer.getMark());
+        boolean placed = board.place(position, currentPlayer.getMark());
+
+        // If the move wasn't allowed (cell taken or off the board), it's still the same player's turn.
+        if (!placed) {
+            return;
+        }
+
         for (GameListener listener : listeners) {
             listener.onMoveMade(currentPlayer, position, board);
         }
